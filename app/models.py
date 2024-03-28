@@ -1,4 +1,7 @@
+from django.conf import settings
 from django.db import models
+
+from users.models import User
 
 
 class Publication(models.Model):
@@ -20,3 +23,8 @@ class Publication(models.Model):
         verbose_name = 'Публикация'
         verbose_name_plural = 'Публикации'
         ordering = ['-time_create']
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата подписки')
