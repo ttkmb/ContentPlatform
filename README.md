@@ -38,4 +38,6 @@
 
 - Запустить контейнер:
   docker-compose build
-  docker-compose up или docker-compose up -d
+  docker-compose up
+  или
+  docker-compose up -d
