@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 from django.apps import apps
+from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -19,7 +20,7 @@ class UserManager(BaseUserManager):
         phone_number = GlobalUserModel.normalize_username(phone_number)
         user = self.model(phone_number=phone_number, **extra_fields)
         user.password = make_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
 
     def create_user(self, phone_number, password=None, **extra_fields):
