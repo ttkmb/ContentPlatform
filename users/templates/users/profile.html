@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -43,11 +44,11 @@
     <h1>Профиль пользователя</h1>
 
     <div class="profile">
-        <img src="avatar.jpg" alt="Avatar" width="100">
+        <img src="{{ user.profile.avatar.url }}" alt="Avatar" width="100">
         <div class="info">
             <form method="post" action="">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button type="submit">Сохранить</button>
                 <button type="submit" formaction="{% url 'users:logout' %}">Выход</button>
             </form>
