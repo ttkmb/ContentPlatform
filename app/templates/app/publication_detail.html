@@ -1,0 +1,70 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заголовок Вашей Записи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Чтобы контейнер обвел изображение */
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        .post-meta {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+        .image-wrapper {
+            float: right; /* Выравнивание изображения справа */
+            margin-left: 20px; /* Пространство между текстом и изображением */
+        }
+        .image-wrapper img {
+            max-width: 100%; /* Чтобы изображение не выходило за пределы контейнера */
+            height: auto; /* Автоматическая высота, чтобы сохранить пропорции */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ object.title }}</h1>
+    <div class="post-meta">
+        <span>{{ object.time_create}}</span>
+    </div>
+    <p>{{ object.description }}</p>
+    <div class="image-wrapper">
+        <img src="https://via.placeholder.com/150" alt="Описание изображения">
+    </div>
+    {% if perms.app.change_publication %}
+    <a href="{% url 'app:update' object.slug %}">
+                <button type="button" class="btn btn-outline-primary">Редактировать
+                </button>
+    </a>
+    {% endif %}
+    {% if perms.app.delete_publication %}
+    <a href="{% url 'app:delete' object.slug %}">
+                <button type="button" class="btn btn-outline-primary">Удалить
+                </button>
+    </a>
+    {% endif %}
+</div>
+</body>
+{% endblock %}
+
